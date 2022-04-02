@@ -13,6 +13,9 @@ A resource for psuedo code for this algorithm can be found [here][pseudo-code].
 Particle swarm optimization (PSO) is a stochastic search method that finds the global minimum of a function by taking an a number of guesses and moving them around in the search space. 
 Each particle is aware of it's own location and the value of it's 
 
+
+### Example code snippets
+
 Jekyll also offers powerful support for code snippets:
 
 {% highlight ruby %}
