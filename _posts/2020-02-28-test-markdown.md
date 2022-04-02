@@ -33,6 +33,10 @@ Here's a useless table:
 | Seven | Eight | Six |
 | Two | Three | One |
 
+Picture of Me!
+
+![Me](/assets/img/IMG_0251.jpg)
+
 
 How about a yummy crepe?
 
