@@ -9,13 +9,14 @@ permalink: "ParticleSwarmOptimization"
 This post is about a single objective particle swarm optimization algorithm. [Particle Swarm Optimization][Particle-Swarm-Optimization] is a nature-inspired heuristic optimization algorithm. 
 It allows one to find the global minimum of a function subject to any constraints without calculating any gradients. 
 
-Single objective optimization consists of finding the global miniumum of a function, $$ f(x, y) $$, over a range of bounds for x and y, and subject to some constraint. 
-For example, consider the function 
+Single objective optimization consists of finding the global miniumum of a function, $ f(x, y) $, over a range of bounds for x and y, and subject to some constraint. 
+For example, consider the function:
 
 $$ f(x, y) = sin(y)e^{\((1-cos(x))^{2}} + cos(x)e^{\((1-sin(x))^{2}} + (x - y)^{2} $$
 
 ![Me](/assets/img/pso_surface.png){: .mx-auto.d-block :}
 
+The goal of Single Objective Optimization is to find the global minium of this function, which is $$ f(-3.13, -1.58) = -106.76 $$. However, this function has multiple local minumums, which can make it difficult to solve. 
 A resource for psuedo code for this algorithm can be found [here][pseudo-code].
 
 Particle swarm optimization (PSO) is a stochastic search method that finds the global minimum of a function by taking an a number of guesses and moving them around in the search space. 

@@ -35,7 +35,7 @@ Here's a useless table:
 
 Picture of Me!
 
-![Me](/assets/img/IMG_0251.jpg)
+![Me](/assets/img/IMG_0251.jpg){: .mx-auto.d-block :}
 
 
 How about a yummy crepe?
