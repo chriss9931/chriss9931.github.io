@@ -62,11 +62,42 @@ The second is a constraint function that takes in the array of input variables a
 An initial position is also given, as well as the upper and lower bounds on the input variables. The initial position is then evaluated, and the intial velocity is set to zero.
 The personal best position and value are set as the intial. 
 
-The evaluation function takes a position, passes it through the function. Then takes the position and function value and passes it through the constraint function.
+The evaluation function takes a position, evaluates it to get the function value, then determines whether or not the position is within the constraints.
 
-In order to 
+{% highlight python linenos %}
+    def evaluate(self, x):
+        f_vals = self.func(x)
+        eligible = self.constraintfunc(f_vals, x)
+        return f_vals, eligible
+{% endhighlight %}
 
-![Me](/assets/img/install-steps.gif){: .mx-auto.d-block :}
+Now, we must give the particles a way to move. We want the paricles to move towards the global minimum. To do this, we will use the following formula.
+
+$$ V_{i+1} = \alphaV_{i} + A(rand())(X_{Personal Best} - X_{i}) + B(rand())(X_{Global Best} - X_{i}) $$
+
+In this equation rand() is a randomly generated number between 0 and 1. $$ \alpha $$ is a parameter between 0 and 1 that determines the weighting of the previous velocity in the new velocity.
+Then, we have the hyperparameters A and B, determining the weighting of the particles personal best and the swarms global best position. 
+These parameters have a large effect on performance, but the suggested range is between 1 and 3. They will be set as inputs to the move function, defined below.
+
+{% highlight python linenos %}
+    def Move(self, xg_best, alpha, A, B):
+        Vi = (alpha*self.v_current
+             + A*np.random.rand()*(self.xp_best - self.x_current)
+             + B*np.random.rand()*(xg_best - self.x_current))
+        self.x_current = self.x_current + Vi
+        # Check for new positions outside of the bounds
+        for variable in range(len(self.x_current)):
+            if self.x_current[variable] < self.LB[variable]:
+                self.x_current[variable] = self.LB[variable]
+            if self.x_current[variable] > self.UB[variable]:
+                self.x_current[variable] = self.UB[variable]
+        # re-evaluate functions
+        self.f_current, self.eligible = self.evaluate(self.x_current)
+        if self.eligible:
+            if self.f_current < self.fp_best:
+                self.fp_best = self.f_current
+                self.xp_best = self.x_current
+{% endhighlight %}
 
 
 ### Example Equation
