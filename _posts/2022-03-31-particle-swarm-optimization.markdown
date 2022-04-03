@@ -25,17 +25,14 @@ There are two main classes of optimization algorithms:
 - Gradient-based Algorithms: Calculates the local gradients of the function and moves towards the negative values
 - Heuristic Algorithms: Designed to solve problems quickly, often attempting to imitate nature.
 
-Particle swarm optimization (PSO) is an heuristic algorithm designed to find the global minimum of a function by taking a number of guesses and strategically moving them around in the search space. 
-The swarm is made up of N number of particles, and each particle has to keep track of:
-- Current Position
-- Current Velocity
-- Current Function Evaluation. 
-- Personal Best Function Evaluation
-- Corresponding Personal Best Position
-- Global Best Function Evaluation
-- Corresponding Global Best Position
-The global best positions must consider every particle in the entire swarm. The velocity of the particle determines how the particle moves each iteration. 
+Particle swarm optimization (PSO) is an heuristic algorithm designed to simulate social behavior, or swarm intelligence.
+In order to find the global minimum of a function, a swarm of particles is created and placed in the search space. 
+Then, for each particle a velocity is calculated using the particles previous velocity, personal best position, and the global best position.
 
+The entire swarm moves each iteration, searching for the global minimum.
+If a particle moves to a location outside of the search space, then the particles position is set to the boundary of the space.
+If there are constraints on the problem, then they are considered as inelegible to become one of the 'best' positions, and are therefore ignored. 
+The stopping condition is defined when either the global best position does not change for a number of iterations, or the maximum number of iterations is exceeded. 
 
 
 
