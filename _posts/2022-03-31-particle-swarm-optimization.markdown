@@ -26,7 +26,10 @@ $$ f(x, y) = sin(y)e^{(1-cos(x))^{2}} + cos(x)e^{(1-sin(x))^{2}} + (x - y)^{2} $
 ![Me](/assets/img/pso_surface.png){: .mx-auto.d-block :}
 
 The goal of Single Objective Optimization is to find the global minimum of this function, which is $$ f(-3.13, -1.58) = -106.76 $$.
-However, this function has multiple local minumums, which can make it difficult to solve. 
+However, this function has multiple local minumums, which can make it difficult to solve. A top-view contour plot of this function is also shown below.
+
+![Me](/assets/img/pso_contour.png){: .mx-auto.d-block :}
+
 There are two main classes of optimization algorithms:
 - Gradient-based Algorithms:  Calculates the local gradients of the function and moves towards the negative values
 - Heuristic Algorithms: Designed to solve problems quickly, often attempting to imitate nature.
@@ -73,7 +76,7 @@ The evaluation function takes a position, evaluates it to get the function value
 
 Now, we must give the particles a way to move. We want the paricles to move towards the global minimum. To do this, we will use the following formula.
 
-$$ V_{i+1} = \alphaV_{i} + A(rand())(X_{Personal Best} - X_{i}) + B(rand())(X_{Global Best} - X_{i}) $$
+$$ V_{i+1} = \alpha V_{i} + A(rand())(X_{Personal Best} - X_{i}) + B(rand())(X_{Global Best} - X_{i}) $$
 
 In this equation rand() is a randomly generated number between 0 and 1. $$ \alpha $$ is a parameter between 0 and 1 that determines the weighting of the previous velocity in the new velocity.
 Then, we have the hyperparameters A and B, determining the weighting of the particles personal best and the swarms global best position. 
@@ -99,32 +102,64 @@ These parameters have a large effect on performance, but the suggested range is 
                 self.xp_best = self.x_current
 {% endhighlight %}
 
+### The Swarm
 
-### Example Equation
-
-$$
-\begin{align}
-  \tag{1.1}
-  V_{sphere} = \frac{4}{3}\pi r^3
-\end{align}
-$$
-
-### Example code snippets
-
-Jekyll also offers powerful support for code snippets:
-
-{% highlight ruby %}
-def print_hi(name)
-  puts "Hi, #{name}"
-end
-print_hi('Tom')
-#=> prints 'Hi, Tom' to STDOUT.
+Now, a function created to build the swarm. 
+{% highlight python linenos %}
+def pso(efunc, cfunc, ipop, LB, UB, Nmx, alpha, A, B):
+    pop = np.empty((len(ipop)), dtype=object)
+    for i in range(len(ipop)):
+        pop[i] = Particle(efunc, cfunc, ipop[i], LB, UB)
+    fg_best = 1E15
+    xg_best = None
+    for particle in pop:
+        f_local, x_local = particle.get_best()
+        if f_local < fg_best:
+            fg_best = f_local
+            xg_best = x_local
 {% endhighlight %}
 
-Check out the [Jekyll docs][jekyll-docs] for more info on how to get the most out of Jekyll. File all bugs/feature requests at [Jekyll’s GitHub repo][jekyll-gh]. If you have questions, you can ask them on [Jekyll Talk][jekyll-talk].
+This function takes the evaluation and constraint functions, an initial population of position values, position upper and lower bounds, a maximum number of iterations, and finally the three hyperparameters.
+The first thing to happen is to take the initial positions and create the swarm of particles. Then, the swarm of particles is checked for a global best position.
+
+Now, a counter variable `fg_best_changeITER` will be defined to determine how many iterations it has been since the global best value has changed. Then the loop through the iterations will begin.
+
+{% highlight python linenos %}
+	fg_best_changeITER = 0
+    print('initialized')
+    N = 0
+    while N < Nmx:
+        if N % 100 == 0:
+            print('Iteration #', N)
+        for particle in pop:
+            particle.Move(xg_best, alpha, A, B)
+        fg_best_prev = fg_best
+        for particle in pop:
+            f_local, x_local = particle.get_best()
+            if (f_local < fg_best) and particle.elig():
+                fg_best = f_local
+                xg_best = x_local
+        if fg_best == fg_best_prev:
+            fg_best_changeITER += 1
+        else:
+            fg_best_changeITER = 0
+        if fg_best_changeITER > 20:
+            print('STOP: Best function evaluation did not change for 10 iterations')
+            break
+        N += 1
+{% endhighlight %}
+
+For each iteration the first thing that happens is the particles are moved. Then, each particle is checked against the global best, and the global best is updated.
+Finally, there is a check to see if the global best has changed that iteration. If it hasn't changed for 20 iterations, then convergence is assumed and the loop ends.
+The function then ends by returning the number of iterations and the resulting global best position and value.
+
+Now we can run the function, and see the results.
+
+![Me](/assets/img/swarmsearch.gif){: .mx-auto.d-block :}
+
+This gif shows the population's positions at every itertion. The algorithm begins to converge very quickly, but does not stop until it is sure that the minimum will not change.
+several points end up moving back and forth, torn between the global best position and it's own best position.
 
 [Particle-Swarm-Optimization]: https://en.wikipedia.org/wiki/Particle_swarm_optimization
 [pseudo-code]: https://mae.ufl.edu/haftka/stropt/Lectures/PSO_introduction.pdf
-[jekyll-docs]: https://jekyllrb.com/docs/home
-[jekyll-gh]:   https://github.com/jekyll/jekyll
-[jekyll-talk]: https://talk.jekyllrb.com/
+
