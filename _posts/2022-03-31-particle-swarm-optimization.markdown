@@ -160,7 +160,7 @@ Now we can run the function, and see the results.
 This gif shows the population's positions at every itertion. The algorithm begins to converge very quickly, but does not stop until it is sure that the minimum will not change.
 several points end up moving back and forth, torn between the global best position and it's own best position.
 
-The code for this algorithm can be found at [This Github Repository][PSO-Repo
+The code for this algorithm can be found at [This Github Repository][PSO-Repo]
 
 
 [PSO-Repo]: https://github.com/chriss9931/Particle-Swarm-Optimization
