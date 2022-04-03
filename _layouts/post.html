@@ -38,7 +38,11 @@ layout: base
           {% endfor %}
         </div>
       {% endif %}
-
+	  
+	  {% if page.mathjax  %}
+	  <script type="text/javascript" async src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML'></script>
+	  {% endif %}
+	  
       <article role="main" class="blog-post">
         {{ content }}
       </article>
