@@ -7,6 +7,10 @@ author: "Chris Summers"
 permalink: "ParticleSwarmOptimization"
 useMath: true
 ---
+<script type="text/javascript" async
+  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+
 This post is about a single objective particle swarm optimization algorithm. 
 [Particle Swarm Optimization][Particle-Swarm-Optimization] is a nature-inspired heuristic optimization algorithm. 
 A resource for psuedo code for this algorithm can be found [here][pseudo-code].
