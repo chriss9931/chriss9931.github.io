@@ -15,32 +15,47 @@ useMath: true
 
 This post is about a single objective particle swarm optimization algorithm. 
 [Particle Swarm Optimization][Particle-Swarm-Optimization] is a nature-inspired heuristic optimization algorithm. 
-A resource for psuedo code for this algorithm can be found [here][pseudo-code].
+A resource for psuedo-code for this algorithm can be found [here][pseudo-code].
 This is one of several types of heuristic optimization algorithms that allow one to find the global minimum of a function subject to any constraints without calculating any gradients. 
 
 Single objective optimization consists of finding the global miniumum of a function, $$ f(x, y) $$, over a range of bounds for x and y, and subject to some constraint. 
 For example, consider the function:
 
-$$ f(x, y) = sin(y)e^{((1-cos(x))^{2}} + cos(x)e^{((1-sin(x))^{2}} + (x - y)^{2} $$
+$$ f(x, y) = sin(y)e^{(1-cos(x))^{2}} + cos(x)e^{(1-sin(x))^{2}} + (x - y)^{2} $$
 
 ![Me](/assets/img/pso_surface.png){: .mx-auto.d-block :}
 
 The goal of Single Objective Optimization is to find the global minimum of this function, which is $$ f(-3.13, -1.58) = -106.76 $$.
 However, this function has multiple local minumums, which can make it difficult to solve. 
 There are two main classes of optimization algorithms:
-- Gradient-based Algorithms: Calculates the local gradients of the function and moves towards the negative values
+- Gradient-based Algorithms:  Calculates the local gradients of the function and moves towards the negative values
 - Heuristic Algorithms: Designed to solve problems quickly, often attempting to imitate nature.
 
 Particle swarm optimization (PSO) is an heuristic algorithm designed to simulate social behavior, or swarm intelligence.
-In order to find the global minimum of a function, a swarm of particles is created and placed in the search space. 
-Then, each particle is given velocity using its personal best position and the global best position.
+In order to find the global minimum, a swarm of particles is created and placed in the search space. 
+Then, each particle is given velocity its p, moving it towards its personal best position and the global best position.
 
-The entire swarm moves each iteration, searching for the global minimum.
+Each iteration, every particle in the swarm moves while updting the global and personal best positions in search of the global minimum.
 If a particle moves to a location outside of the search space, then the particles position is set to the boundary of the space.
-If there are constraints on the problem, then they are considered as inelegible to become one of the 'best' positions, and are therefore ignored. 
+If there are constraints on the problem, then any particle violating those constraints are considered as inelegible to become one of the 'best' positions. 
 The stopping condition is defined when either the global best position does not change for a number of iterations, or the maximum number of iterations is exceeded. 
 
+### Particles
 
+In order for the algorithm to work, particles need to be able keep track of their own data, send data, recieve data, and move. For this, we will make a particle class.
+{% highlight python %}
+class Particle():
+    def __init__(self, func, const, position, LB, UB):
+        self.func = func
+        self.const = const
+        self.x_current = position
+        self.v_current = np.zeros_like(position)
+        self.f_current, self.eligible = self.evaluate(position)
+        self.fp_best = self.f_current
+        self.xp_best = np.zeros_like(position)
+        self.LB = LB
+        self.UB = UB
+{% endhighlight %}
 
 ### Example Equation
 
