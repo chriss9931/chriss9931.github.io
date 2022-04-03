@@ -43,11 +43,11 @@ The stopping condition is defined when either the global best position does not 
 ### Particles
 
 In order for the algorithm to work, particles need to be able keep track of their own data, send data, recieve data, and move. For this, we will make a particle class.
-{% highlight python %}
+{% highlight python linenos %}
 class Particle():
-    def __init__(self, func, const, position, LB, UB):
+    def __init__(self, func, constraintfunc, position, LB, UB):
         self.func = func
-        self.const = const
+        self.constraintfunc = constraintfunc
         self.x_current = position
         self.v_current = np.zeros_like(position)
         self.f_current, self.eligible = self.evaluate(position)
@@ -56,6 +56,15 @@ class Particle():
         self.LB = LB
         self.UB = UB
 {% endhighlight %}
+
+When initializing a particle, two functions are passed. The first is the function to be minimized, taking in an array of input variables and returns the value. 
+The second is a constraint function that takes in the array of input variables and the function value returning a boolean that states whether or not the position is feasible.
+An initial position is also given, as well as the upper and lower bounds on the input variables. The initial position is then evaluated, and the intial velocity is set to zero.
+The personal best position and value are set as the intial. 
+
+The evaluation function takes a position, passes it through the function. Then takes the position and function value and passes it through the constraint function.
+
+In order to 
 
 ### Example Equation
 
