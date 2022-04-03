@@ -5,9 +5,12 @@ date:   2022-03-31 23:31:35 -0500
 categories: Project
 author: "Chris Summers"
 permalink: "ParticleSwarmOptimization"
+useMath: true
 ---
-This post is about a single objective particle swarm optimization algorithm. [Particle Swarm Optimization][Particle-Swarm-Optimization] is a nature-inspired heuristic optimization algorithm. 
-It allows one to find the global minimum of a function subject to any constraints without calculating any gradients. 
+This post is about a single objective particle swarm optimization algorithm. 
+[Particle Swarm Optimization][Particle-Swarm-Optimization] is a nature-inspired heuristic optimization algorithm. 
+A resource for psuedo code for this algorithm can be found [here][pseudo-code].
+This is one of several types of heuristic optimization algorithms that allow one to find the global minimum of a function subject to any constraints without calculating any gradients. 
 
 Single objective optimization consists of finding the global miniumum of a function, $ f(x, y) $, over a range of bounds for x and y, and subject to some constraint. 
 For example, consider the function:
@@ -16,11 +19,22 @@ $$ f(x, y) = sin(y)e^{\((1-cos(x))^{2}} + cos(x)e^{\((1-sin(x))^{2}} + (x - y)^{
 
 ![Me](/assets/img/pso_surface.png){: .mx-auto.d-block :}
 
-The goal of Single Objective Optimization is to find the global minium of this function, which is $$ f(-3.13, -1.58) = -106.76 $$. However, this function has multiple local minumums, which can make it difficult to solve. 
-A resource for psuedo code for this algorithm can be found [here][pseudo-code].
+The goal of Single Objective Optimization is to find the global minimum of this function, which is $ f(-3.13, -1.58) = -106.76 $.
+However, this function has multiple local minumums, which can make it difficult to solve. 
+There are two main classes of optimization algorithms:
+- Gradient-based Algorithms: Calculates the local gradients of the function and moves towards the negative values
+- Heuristic Algorithms: Designed to solve problems quickly, often attempting to imitate nature.
 
-Particle swarm optimization (PSO) is a stochastic search method that finds the global minimum of a function by taking an a number of guesses and moving them around in the search space. 
-Each particle is aware of it's own location and the value of it's function value. Then, 
+Particle swarm optimization (PSO) is an heuristic algorithm designed to find the global minimum of a function by taking a number of guesses and strategically moving them around in the search space. 
+The swarm is made up of N number of particles, and each particle has to keep track of:
+- Current Position
+- Current Velocity
+- Current Function Evaluation. 
+- Personal Best Function Evaluation
+- Corresponding Personal Best Position
+- Global Best Function Evaluation
+- Corresponding Global Best Position
+The global best positions must consider every particle in the entire swarm. The velocity of the particle determines how the particle moves each iteration. 
 
 
 
