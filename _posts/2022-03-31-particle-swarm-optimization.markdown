@@ -10,6 +10,8 @@ useMath: true
 <script type="text/javascript" async
   src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML">
 </script>
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 
 This post is about a single objective particle swarm optimization algorithm. 
 [Particle Swarm Optimization][Particle-Swarm-Optimization] is a nature-inspired heuristic optimization algorithm. 
