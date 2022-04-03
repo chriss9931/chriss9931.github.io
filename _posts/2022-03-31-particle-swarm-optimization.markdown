@@ -66,6 +66,9 @@ The evaluation function takes a position, passes it through the function. Then t
 
 In order to 
 
+![Me](/assets/img/install-steps.gif){: .mx-auto.d-block :}
+
+
 ### Example Equation
 
 $$
