@@ -18,14 +18,14 @@ This post is about a single objective particle swarm optimization algorithm.
 A resource for psuedo code for this algorithm can be found [here][pseudo-code].
 This is one of several types of heuristic optimization algorithms that allow one to find the global minimum of a function subject to any constraints without calculating any gradients. 
 
-Single objective optimization consists of finding the global miniumum of a function, \\( f(x, y) )\\, over a range of bounds for x and y, and subject to some constraint. 
+Single objective optimization consists of finding the global miniumum of a function, $$ f(x, y) $$, over a range of bounds for x and y, and subject to some constraint. 
 For example, consider the function:
 
-$$ f(x, y) = sin(y)e^{\((1-cos(x))^{2}} + cos(x)e^{\((1-sin(x))^{2}} + (x - y)^{2} $$
+$$ f(x, y) = sin(y)e^{((1-cos(x))^{2}} + cos(x)e^{((1-sin(x))^{2}} + (x - y)^{2} $$
 
 ![Me](/assets/img/pso_surface.png){: .mx-auto.d-block :}
 
-The goal of Single Objective Optimization is to find the global minimum of this function, which is \\( f(-3.13, -1.58) = -106.76 )\\.
+The goal of Single Objective Optimization is to find the global minimum of this function, which is $$ f(-3.13, -1.58) = -106.76 $$.
 However, this function has multiple local minumums, which can make it difficult to solve. 
 There are two main classes of optimization algorithms:
 - Gradient-based Algorithms: Calculates the local gradients of the function and moves towards the negative values
@@ -33,7 +33,7 @@ There are two main classes of optimization algorithms:
 
 Particle swarm optimization (PSO) is an heuristic algorithm designed to simulate social behavior, or swarm intelligence.
 In order to find the global minimum of a function, a swarm of particles is created and placed in the search space. 
-Then, for each particle a velocity is calculated using the particles previous velocity, personal best position, and the global best position.
+Then, each particle is given velocity using its personal best position and the global best position.
 
 The entire swarm moves each iteration, searching for the global minimum.
 If a particle moves to a location outside of the search space, then the particles position is set to the boundary of the space.
