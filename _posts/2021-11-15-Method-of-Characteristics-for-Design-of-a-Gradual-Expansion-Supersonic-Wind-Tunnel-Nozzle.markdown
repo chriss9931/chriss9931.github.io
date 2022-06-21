@@ -2,7 +2,10 @@
 layout: post
 title:  "Method of Characteristics for Design of a Gradual Expansion Supersonic Wind Tunnel Nozzle"
 date:   2021-11-15 23:31:35 -0500
-categories: jekyll update
+categories: Project
+author: "Chris Summers"
+permalink: "MoCNozzle"
+useMath: true
 ---
 The design of a nozzle contour for a supersonic nozzle is a difficult problem, and this article presents a simplified solution for two dimensional supersonic nozzle design. There are two main types of supersonic nozzles.
 First is a minimum length nozzle, designed for rocket engines. These nozzles achieve isentropic expansion for a target exit mach number in the minimum possible length, therefore minimizing mass.
@@ -15,11 +18,11 @@ There are many resources for minimum length rocket nozzle design. Below is a lis
 - [Tutorial for solving by hand][Video-2]
 - [MATLAB video tutorial][Video-3]
 
-To summarize the method of Characteristics, 
-<img
-  src="https://latex.codecogs.com/svg.image?\frac{0.1*25,000}{0.85*min(1.5,1)*10}(1.5*10)"
-  title="\frac{0.1*25,000}{0.85*min(1.5,1)*10}(1.5*10)"
-/>
+The method of characteristics takes advantage of a concept called characteristic lines. 
+In two-dimensional, steady, inviscid, and supersonic flow, lines exist within the flow field along which the derivatives of the flow field variables have discontinuities and the values are indeterminate. 
+The governing equation of this flow can be obtained by starting with the Navier-Stokes Equations, simplifying, and substituting in the velocity potential to get the following equation.
+
+$$ (1-\frac{1}{a^2}(\frac{\del \phi}{\del x})^2)\frac{\del^2 \phi}{\del x^2} $$
 
 `YEAR-MONTH-DAY-title.MARKUP`
 
