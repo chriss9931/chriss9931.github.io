@@ -22,7 +22,7 @@ The method of characteristics takes advantage of a concept called characteristic
 In two-dimensional, steady, inviscid, and supersonic flow, lines exist within the flow field along which the derivatives of the flow field variables have discontinuities and the values are indeterminate. 
 The governing equation of this flow can be obtained by starting with the Navier-Stokes Equations, simplifying, and substituting in the velocity potential to get the following equation.
 
-$$ (1-\frac{1}{a^2}(\frac{\del \phi}{\del x})^2)\frac{\del^2 \phi}{\del x^2} $$
+<img src="https://latex.codecogs.com/svg.image?[1-\frac{1}{a^{2}}(\frac{\partial&space;\phi&space;}{\partial&space;x})^{2}]\frac{\partial&space;^{2}\phi}{\partial&space;x^{2}}&space;&plus;&space;[1-\frac{1}{a^{2}}(\frac{\partial&space;\phi&space;}{\partial&space;y})^{2}]\frac{\partial&space;^{2}\phi}{\partial&space;y^{2}}&space;-&space;\frac{2}{a^{2}}\frac{\partial&space;\phi}{\partial&space;x}\frac{\partial&space;\phi}{\partial&space;y}\frac{\partial^{2}&space;\phi}{\partial&space;x\partial&space;y}=0" title="https://latex.codecogs.com/svg.image?[1-\frac{1}{a^{2}}(\frac{\partial \phi }{\partial x})^{2}]\frac{\partial ^{2}\phi}{\partial x^{2}} + [1-\frac{1}{a^{2}}(\frac{\partial \phi }{\partial y})^{2}]\frac{\partial ^{2}\phi}{\partial y^{2}} - \frac{2}{a^{2}}\frac{\partial \phi}{\partial x}\frac{\partial \phi}{\partial y}\frac{\partial^{2} \phi}{\partial x\partial y}=0" />
 
 `YEAR-MONTH-DAY-title.MARKUP`
 
